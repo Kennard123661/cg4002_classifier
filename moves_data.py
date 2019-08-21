@@ -20,7 +20,7 @@ def read_data(is_train):
     filenames = sorted(os.listdir(data_dir))
     filepaths = [os.path.join(data_dir, filename) for filename in filenames]
     sensor_readings, labels = list(), list()
-    print(filepaths)
+
     for filepath in filepaths:
         filename = os.path.split(filepath)[-1]
         move_type = filename.split('_')[0]
@@ -88,7 +88,7 @@ class MovesDataset(data.Dataset):
         selected_data = [data_x[selected_idxs[i]] for i, data_x in enumerate(sorted_x)]
         selected_labels = [np.array([1] * min_data) * label for label in np.unique(self.labels)]
         x = np.array(selected_data).reshape(-1, self.num_coefficients * NUM_SENSOR_READINGS)
-        y = np.array(selected_labels).reshape(-1, 1)
+        y = np.array(selected_labels, dtype=np.long).reshape(-1, 1)
         return x, y
 
     def __len__(self):
