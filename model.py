@@ -10,8 +10,10 @@ class LinearModel(nn.Module):
         layers = [
             nn.Linear(self.num_input_features, hidden_len),
             # nn.BatchNorm1d(hidden_len),
+            nn.Dropout(0.5),
             nn.ReLU(inplace=True),
             nn.Linear(hidden_len, hidden_len),
+            nn.Dropout(0.5),
             # nn.BatchNorm1d(hidden_len),
             nn.ReLU(inplace=True),
         ]

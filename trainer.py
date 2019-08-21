@@ -38,6 +38,7 @@ class Trainer:
             self.evaluate_step(test_data_loader)
 
     def train_step(self, train_data_loader):
+        self.model.train()
         epoch_losses = list()
         for (features, labels) in train_data_loader:
             # print(features.shape)
@@ -50,6 +51,7 @@ class Trainer:
         print("loss: {}".format(np.mean(epoch_losses)))
 
     def evaluate_step(self, test_data_loader):
+        self.model.eval()
         num_correct = 0
         num_data = 0
         with torch.no_grad():
@@ -67,7 +69,7 @@ class Trainer:
 if __name__ == '__main__':
     from moves_data import get_dataset, NUM_SENSOR_READINGS, MOVE_LIST
     seg_length = 32
-    num_coefficients = 16
+    num_coefficients = 8
 
     train_dataset = get_dataset(is_train=True, segment_length=seg_length, num_coefficients=num_coefficients)
     test_dataset = get_dataset(is_train=False, segment_length=seg_length, num_coefficients=num_coefficients)
