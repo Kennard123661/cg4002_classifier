@@ -15,3 +15,9 @@ To train the model, simply run
 ```
 python trainer.py 
 ```
+
+## Visualizing Training
+
+```
+tensorboard --logdir=logs/draft
+```
